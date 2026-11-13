@@ -1,0 +1,11 @@
+rules_version = '2';
+
+// Fayllar faqat backend orqali (format, hajm va xavfsizlik tekshiruvidan so'ng) yuklanadi
+// va imzolangan URL orqali beriladi. Mijozdan to'g'ridan-to'g'ri kirish yopiq.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

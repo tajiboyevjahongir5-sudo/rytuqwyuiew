@@ -1,0 +1,25 @@
+{
+  "indexes": [
+    { "collectionGroup": "textbooks", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "status", "order": "ASCENDING" }, { "fieldPath": "grade", "order": "ASCENDING" }, { "fieldPath": "order", "order": "ASCENDING" } ] },
+    { "collectionGroup": "topics", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "textbookId", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" }, { "fieldPath": "order", "order": "ASCENDING" } ] },
+    { "collectionGroup": "formulas", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "category", "order": "ASCENDING" }, { "fieldPath": "grade", "order": "ASCENDING" } ] },
+    { "collectionGroup": "problems", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "topicId", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" }, { "fieldPath": "difficulty", "order": "ASCENDING" } ] },
+    { "collectionGroup": "quizzes", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "topicId", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" } ] },
+    { "collectionGroup": "userProgress", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "userId", "order": "ASCENDING" }, { "fieldPath": "lastActivityAt", "order": "DESCENDING" } ] },
+    { "collectionGroup": "aiSessions", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "userId", "order": "ASCENDING" }, { "fieldPath": "createdAt", "order": "DESCENDING" } ] },
+    { "collectionGroup": "payments", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "userId", "order": "ASCENDING" }, { "fieldPath": "createdAt", "order": "DESCENDING" } ] },
+    { "collectionGroup": "contentVersions", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "contentId", "order": "ASCENDING" }, { "fieldPath": "version", "order": "DESCENDING" } ] },
+    { "collectionGroup": "users", "queryScope": "COLLECTION", "fields": [
+      { "fieldPath": "premium.plan", "order": "ASCENDING" }, { "fieldPath": "lastActiveAt", "order": "DESCENDING" } ] }
+  ],
+  "fieldOverrides": []
+}

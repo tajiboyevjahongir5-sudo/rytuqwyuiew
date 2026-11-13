@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// PHYSICA xavfsizlik modeli:
+// Foydalanuvchilar Telegram initData orqali BACKEND da autentifikatsiyadan o'tadi va
+// barcha o'qish/yozish backend (Firebase Admin SDK) orqali bajariladi. Admin SDK bu
+// qoidalarni chetlab o'tadi, shuning uchun mijoz SDK lari uchun HAMMA narsa yopiq.
+// Natija: Firebase konfiguratsiyasi kimningdir qo'liga tushsa ham, hech bir o'quvchi
+// boshqa o'quvchining ma'lumotini to'g'ridan-to'g'ri o'qiy yoki o'zgartira olmaydi.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
