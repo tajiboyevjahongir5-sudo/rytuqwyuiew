@@ -44,7 +44,12 @@ async function main() {
 }
 
 main().catch((err) => {
-  if (err instanceof ConfigError) logger.error(err.message);
-  else logger.error("Serverni ishga tushirib bo'lmadi", { err });
+  if (err instanceof ConfigError) {
+    logger.error(err.message);
+  } else {
+    console.error('CRASH SABABI:', err);
+    console.error(err?.stack ?? String(err));
+    logger.error("Serverni ishga tushirib bo'lmadi", { err });
+  }
   process.exit(1);
 });

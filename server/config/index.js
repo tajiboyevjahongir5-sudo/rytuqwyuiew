@@ -31,7 +31,7 @@ const schema = z.object({
   MINI_APP_URL: z.string().optional().default(''),
   BOT_ENABLED: bool(false),
   DB_DRIVER: z.enum(['firestore', 'local', 'memory']).default('local'),
-  LOCAL_DB_FILE: z.string().optional().default('.data/db.json'),
+  LOCAL_DB_FILE: z.string().optional().default('/data/db.json'),
   FIREBASE_SERVICE_ACCOUNT: z.string().optional().default(''),
   FIREBASE_PROJECT_ID: z.string().optional().default(''),
   FIREBASE_STORAGE_BUCKET: z.string().optional().default(''),
@@ -66,7 +66,7 @@ export function loadConfig(env = process.env) {
   }
   if (isProd) {
     if (!e.TELEGRAM_BOT_TOKEN) problems.push('production uchun TELEGRAM_BOT_TOKEN majburiy');
-    if (e.DB_DRIVER !== 'firestore') problems.push("production uchun DB_DRIVER=firestore bo'lishi kerak");
+    if (e.DB_DRIVER === 'memory') problems.push("production uchun DB_DRIVER=memory bo'lishi mumkin emas");
   }
   if (e.DB_DRIVER === 'firestore' && !e.FIREBASE_SERVICE_ACCOUNT && !env.GOOGLE_APPLICATION_CREDENTIALS && !env.FIRESTORE_EMULATOR_HOST) {
     problems.push('DB_DRIVER=firestore uchun FIREBASE_SERVICE_ACCOUNT yoki GOOGLE_APPLICATION_CREDENTIALS kerak');
