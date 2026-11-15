@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { createAiRouter } from './ai.js';
 import { createAuthController } from '../controllers/auth.controller.js';
 import { createSystemController } from '../controllers/system.controller.js';
 import { createUserController } from '../controllers/user.controller.js';
@@ -33,6 +34,9 @@ export function createApiRouter(deps) {
   // ── Profil ──
   router.get('/me', auth, userCtl.me);
   router.patch('/me', auth, validateBody(updateProfileSchema), userCtl.updateMe);
+
+  // ── AI Ustoz ──
+  router.use('/ai', auth, createAiRouter(deps));
 
   // ── Admin (alohida himoyalangan) ──
   const admin = Router();

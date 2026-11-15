@@ -4,6 +4,8 @@ import { emptyState, errorState } from './components/states.js';
 import { setLanguage, t } from './i18n/index.js';
 import * as home from './pages/home.js';
 import * as lab from './pages/lab.js';
+import * as textbooks from './pages/textbooks.js';
+import * as ai from './pages/ai.js';
 import * as notFound from './pages/notFound.js';
 import * as onboarding from './pages/onboarding.js';
 import * as profile from './pages/profile.js';
@@ -19,11 +21,11 @@ const routes = {
   '/': home.render,
   '/onboarding': onboarding.render,
   '/profile': profile.render,
-  '/textbooks': upcomingPage('textbooks'), // PHASE 2
+  '/textbooks': textbooks.render, // Darsliklar va Video darslar
   '/formulas': upcomingPage('formulas'), // PHASE 2
   '/videos': upcomingPage('videos'), // PHASE 2
   '/quizzes': upcomingPage('quizzes'), // PHASE 2
-  '/ai': upcomingPage('ai'), // PHASE 3
+  '/ai': ai.render, // AI Fizika Ustozi
   '/lab': lab.render, // 3D Virtual Laboratoriya
 };
 
