@@ -18,12 +18,11 @@ test('qisqa SESSION_SECRET bilan ishga tushmaydi', () => {
   assert.throws(() => loadConfig({}), ConfigError);
 });
 
-test('production: bot token va firestore majburiy, dev kirish har doim o\'chiq', () => {
+test('production: bot token majburiy, memory driver taqiqlangan, dev kirish har doim o\'chiq', () => {
   assert.throws(() => loadConfig({ ...base, NODE_ENV: 'production' }), /TELEGRAM_BOT_TOKEN/);
-  assert.throws(() => loadConfig({ ...base, NODE_ENV: 'production', TELEGRAM_BOT_TOKEN: 't', DB_DRIVER: 'local' }), /firestore/);
+  assert.throws(() => loadConfig({ ...base, NODE_ENV: 'production', TELEGRAM_BOT_TOKEN: 't', DB_DRIVER: 'memory' }), /DB_DRIVER=memory/);
   const c = loadConfig({
-    ...base, NODE_ENV: 'production', TELEGRAM_BOT_TOKEN: 't', DB_DRIVER: 'firestore',
-    FIREBASE_SERVICE_ACCOUNT: '{}', DEV_AUTH_ENABLED: 'true',
+    ...base, NODE_ENV: 'production', TELEGRAM_BOT_TOKEN: 't', DB_DRIVER: 'local', DEV_AUTH_ENABLED: 'true',
   });
   assert.equal(c.devAuthEnabled, false);
 });

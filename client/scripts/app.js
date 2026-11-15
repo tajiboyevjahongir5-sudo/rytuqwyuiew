@@ -3,6 +3,7 @@ import { authenticate, NotInTelegramError } from './auth.js';
 import { emptyState, errorState } from './components/states.js';
 import { setLanguage, t } from './i18n/index.js';
 import * as home from './pages/home.js';
+import * as lab from './pages/lab.js';
 import * as notFound from './pages/notFound.js';
 import * as onboarding from './pages/onboarding.js';
 import * as profile from './pages/profile.js';
@@ -23,7 +24,7 @@ const routes = {
   '/videos': upcomingPage('videos'), // PHASE 2
   '/quizzes': upcomingPage('quizzes'), // PHASE 2
   '/ai': upcomingPage('ai'), // PHASE 3
-  '/lab': upcomingPage('lab'), // PHASE 6
+  '/lab': lab.render, // 3D Virtual Laboratoriya
 };
 
 const splash = document.getElementById('splash');
