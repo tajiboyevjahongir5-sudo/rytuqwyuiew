@@ -3,9 +3,6 @@ import { authenticate, NotInTelegramError } from './auth.js';
 import { emptyState, errorState } from './components/states.js';
 import { setLanguage, t } from './i18n/index.js';
 import * as home from './pages/home.js';
-import * as lab from './pages/lab.js';
-import * as textbooks from './pages/textbooks.js';
-import * as ai from './pages/ai.js';
 import * as notFound from './pages/notFound.js';
 import * as onboarding from './pages/onboarding.js';
 import * as profile from './pages/profile.js';
@@ -16,17 +13,17 @@ import { telegram } from './telegram.js';
 import { clear } from './utils/dom.js';
 import { errorMessage } from './utils/errors.js';
 
-// Yangi modul sahifasi tayyor bo'lganda shu jadvalda upcomingPage(...) o'rniga ulanadi.
+// Sahifalarni dinamik (lazy) yuklash: ilova darhol va yengil ochiladi
 const routes = {
   '/': home.render,
   '/onboarding': onboarding.render,
   '/profile': profile.render,
-  '/textbooks': textbooks.render, // Darsliklar va Video darslar
-  '/formulas': upcomingPage('formulas'), // PHASE 2
-  '/videos': upcomingPage('videos'), // PHASE 2
-  '/quizzes': upcomingPage('quizzes'), // PHASE 2
-  '/ai': ai.render, // AI Fizika Ustozi
-  '/lab': lab.render, // 3D Virtual Laboratoriya
+  '/textbooks': (ctx) => import('./pages/textbooks.js').then((m) => m.render(ctx)),
+  '/formulas': upcomingPage('formulas'),
+  '/videos': upcomingPage('videos'),
+  '/quizzes': upcomingPage('quizzes'),
+  '/ai': (ctx) => import('./pages/ai.js').then((m) => m.render(ctx)),
+  '/lab': (ctx) => import('./pages/lab.js').then((m) => m.render(ctx)),
 };
 
 const splash = document.getElementById('splash');
