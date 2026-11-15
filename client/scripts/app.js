@@ -3,27 +3,29 @@ import { authenticate, NotInTelegramError } from './auth.js';
 import { emptyState, errorState } from './components/states.js';
 import { setLanguage, t } from './i18n/index.js';
 import * as home from './pages/home.js';
+import * as textbooks from './pages/textbooks.js';
+import * as ai from './pages/ai.js';
+import * as lab from './pages/lab.js';
 import * as notFound from './pages/notFound.js';
 import * as onboarding from './pages/onboarding.js';
 import * as profile from './pages/profile.js';
-import { upcomingPage } from './pages/upcoming.js';
 import { createRouter } from './router.js';
 import { store } from './store.js';
 import { telegram } from './telegram.js';
 import { clear } from './utils/dom.js';
 import { errorMessage } from './utils/errors.js';
 
-// Sahifalarni dinamik (lazy) yuklash: ilova darhol va yengil ochiladi
+// Barcha sahifalarni statik ulash — dinamik import cheklovlarisiz 100% ishonchli ishlaydi
 const routes = {
   '/': home.render,
   '/onboarding': onboarding.render,
   '/profile': profile.render,
-  '/textbooks': (ctx) => import('./pages/textbooks.js').then((m) => m.render(ctx)),
-  '/formulas': upcomingPage('formulas'),
-  '/videos': upcomingPage('videos'),
-  '/quizzes': upcomingPage('quizzes'),
-  '/ai': (ctx) => import('./pages/ai.js').then((m) => m.render(ctx)),
-  '/lab': (ctx) => import('./pages/lab.js').then((m) => m.render(ctx)),
+  '/textbooks': textbooks.render,
+  '/formulas': textbooks.render,
+  '/videos': textbooks.render,
+  '/quizzes': textbooks.render,
+  '/ai': ai.render,
+  '/lab': lab.render,
 };
 
 const splash = document.getElementById('splash');

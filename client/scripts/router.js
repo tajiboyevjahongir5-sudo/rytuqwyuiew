@@ -62,8 +62,9 @@ export function createRouter({ routes, notFound, view, tabbar }) {
       currentCleanup = typeof element.cleanup === 'function' ? element.cleanup : null;
     } catch (err) {
       if (id !== renderId) return;
-      console.error(err);
-      clear(view).append(errorState({ text: errorMessage(err), onRetry: render }));
+      console.error('Router render xatosi:', err);
+      const errDetail = err?.stack || err?.message || errorMessage(err);
+      clear(view).append(errorState({ title: t('error.generic'), text: errDetail, onRetry: render }));
     }
     view.scrollTop = 0;
   }
