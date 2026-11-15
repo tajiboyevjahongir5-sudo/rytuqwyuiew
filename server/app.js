@@ -71,7 +71,18 @@ export function createApp({ config, store }) {
   app.use(API_PREFIX, apiNotFound);
 
   // Frontend (statik). Alohida hostingda ham joylashtirish mumkin.
-  app.use(express.static(CLIENT_DIR, { extensions: ['html'], maxAge: config.isProd ? '10m' : 0 }));
+  app.use(
+    express.static(CLIENT_DIR, {
+      extensions: ['html'],
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=60');
+        }
+      },
+    }),
+  );
 
   app.use(errorHandler);
   return app;

@@ -18,4 +18,9 @@ function show(type, message, duration = 3000) {
 export const toast = {
   success: (message) => show('success', message),
   error: (message) => show('error', message, 4000),
+  info: (message) => show('info', message, 3000),
 };
+
+export function showToast(message, { type = 'success', duration = 3000 } = {}) {
+  return show(type, message, duration);
+}
